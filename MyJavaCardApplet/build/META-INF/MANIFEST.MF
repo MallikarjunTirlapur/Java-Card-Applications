@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Application-Type: classic-applet
+Sealed: true
+Runtime-Descriptor-Version: 3.0
+Classic-Package-AID: //aid/7C0F1B0188/3C
+
