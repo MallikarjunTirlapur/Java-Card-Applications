@@ -47,10 +47,11 @@ public class JavaCardHostApp {
 
     public void establishConnectionToSimulator() {
         try {
-
+            //prgramm socket for the connection with simulator
             sock = new Socket("localhost", 9025);
             os = sock.getOutputStream();
             is = sock.getInputStream();
+            //Initialize the instance card acceptance device
             cad = CadDevice.getCadClientInstance(CadDevice.PROTOCOL_T1, is, os);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,6 +71,7 @@ public class JavaCardHostApp {
     public void pwrUp() {
         try {
             if (cad != null) {
+                //to power up the card
                 cad.powerUp();
             }
         } catch (Exception e) {
@@ -80,6 +82,7 @@ public class JavaCardHostApp {
     public void pwrDown() {
         try {
             if (cad != null) {
+                //power down the card
                 cad.powerDown();
             }
         } catch (Exception e) {
@@ -91,6 +94,7 @@ public class JavaCardHostApp {
         if (cmnds.length > 4 || cmnds.length == 0) {
             System.err.println("inavlid commands");
         } else {
+            //set the APDU header
             apdu.command = cmnds;
             System.out.println("CLA: " + atrToHex(cmnds[0]));
             System.out.println("INS: " + atrToHex(cmnds[1]));
@@ -100,6 +104,7 @@ public class JavaCardHostApp {
     }
 
     public void setTheDataLength(byte ln) {
+        //set the length of the data command
         apdu.Lc = ln;
         System.out.println("Lc: " + atrToHex(ln));
     }
@@ -108,6 +113,7 @@ public class JavaCardHostApp {
         if (data.length != apdu.Lc) {
             System.err.println("The number of data in the array are more than expected");
         } else {
+            //set the data to be sent to the applets
             apdu.dataIn = data;
             for (int dataIndx = 0; dataIndx < data.length; dataIndx++) {
                 System.out.println("dataIn" + dataIndx + ": " + atrToHex(data[dataIndx]));
@@ -117,6 +123,7 @@ public class JavaCardHostApp {
     }
 
     public void setExpctdByteLength(byte ln) {
+        //expected length of the data in the response APDU
         apdu.Le = ln;
         System.out.println("Le: " + atrToHex(ln));
     }
@@ -124,6 +131,7 @@ public class JavaCardHostApp {
     public void exchangeTheAPDUWithSimulator() {
 
         try {
+            //Exchange the APDUs
             apdu.setDataIn(apdu.dataIn, apdu.Lc);
             cad.exchangeApdu(apdu);
         } catch (Exception e) {
