@@ -14,4 +14,7 @@ JDK 1.7.0_79
 * Set the AID values to establish the connection and for selecting the applet
 * run the GelAutomat project.
 
+##License
+MIT
+
 Please let me know, if you face any problems.
