@@ -8,7 +8,7 @@ NetBeans IDE 8.0.2
 Java Card SDK 3.0.2
 JDK 1.7.0_79
 
-### The instructions,
+## The instructions,
 * Download the projects into your local machine.
 * Run the java card applet project first.
 * Set the AID values to establish the connection and for selecting the applet
